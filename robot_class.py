@@ -90,6 +90,14 @@ class robot:
         ##    then we cannot record them; if they do fall in the range, then add them to the measurements list
         ##    as list.append([index, dx, dy]), this format is important for data creation done later
         
+        
+        for i, [x, y] in enumerate(self.landmarks):
+            dx = x - self.x + self.rand() * self.measurement_noise
+            dy = y - self.y + self.rand() * self.measurement_noise
+            
+            dis = sqrt(dx ** 2 + dy ** 2)
+            if dis <= self.measurement_range:
+                measurements.append([i, dx, dy])
         ## TODO: return the final, complete list of measurements
         return measurements
 
